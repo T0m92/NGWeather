@@ -1,0 +1,16 @@
+<!-- weather.component.html -->
+<div *ngIf="dailyWeatherData.length">
+  <div *ngFor="let day of dailyWeatherData">
+    <h3>{{ day.date | date: 'fullDate' }}</h3>
+    <ul>
+      <li *ngFor="let hour of day.hourlyData">
+        {{ hour.dateTime | date: 'HH:mm' }} - 
+        Temp: {{ hour.temperature2m }}°C, 
+        Umidità: {{ hour.relativeHumidity2m }}%, 
+        Temp Percepita: {{ hour.apparentTemperature }}°C, 
+        Prob Pioggia: {{ hour.precipitationProbability }}%, 
+        Vento: {{ hour.windSpeed10m }} km/h
+      </li>
+    </ul>
+  </div>
+</div>
