@@ -16,7 +16,7 @@ export class WeatherService {
     return this.http.get<any>(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m`)
       .pipe(
         map(response => {
-          console.log("Raw response: ", response);  // Aggiungi questo log per vedere la risposta grezza
+          //console.log("Raw response: ", response);  // Aggiungi questo log per vedere la risposta grezza
           return this.transformWeatherData(response);
         })
       );
