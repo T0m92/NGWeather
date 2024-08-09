@@ -1,0 +1,17 @@
+<div class="searchBarContainer">
+    <form [formGroup]="searchForm">
+      <input formControlName="cityName" placeholder="Cittá attuale: Null Island" type="text">
+    </form>
+  
+    <div *ngIf="cities.length > 0">
+      <h3>Select a city:</h3>
+      <ul>
+        <li *ngFor="let city of cities">
+          <button (click)="onSelectCity(city)">
+            Name: {{ city.name }} Country: {{ city.country_code }} Region: {{ city.admin1 }} Province: {{ city.admin2 }} City: {{ city.admin3 }}
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

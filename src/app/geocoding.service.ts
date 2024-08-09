@@ -1,16 +1,18 @@
-// geocoding.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocationInfo } from './models/geocoding.model';
+import { HttpClientJsonpModule } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeocodingService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    console.log('GeocodingService initialized');
+  }
 
   getGeocodingInfo(name: string): Observable<LocationInfo[]> {
     return this.http.get<any>(`https://geocoding-api.open-meteo.com/v1/search?name=${name}&count=10&language=it&format=json`)
@@ -22,18 +24,24 @@ export class GeocodingService {
   transformGeocodingInfo(data: any): LocationInfo[] {
     const geocodingInfoCities: LocationInfo[] = [];
     const results = data.results;
-    const numberOfResults = results.length;
-
-    if (data) {
-      for (let i = 0; i < numberOfResults; i++) {
+  
+    if (results) {
+      for (let result of results) {
         geocodingInfoCities.push({
-          name: results[i].name,
-          latitude: results[i].latitude,
-          longitude: results[i].longitude,
-          admin1: results[i].admin1, // regione (o simili) [più ampio]
-          admin2: results[i].admin2, // provincia (o simili) [più stretto]
-          admin3: results[i].admin3, // nome città (a volte diverso da name)
-          country_code: results[i].country_code // sigla nazione
+          id: result.id,
+          name: result.name,
+          latitude: result.latitude,
+          longitude: result.longitude,
+          elevation: result.elevation,
+          feature_code: result.feature_code,
+          country_code: result.country_code, //Italia = IT
+          admin1: result.admin1,  // Lazio, ecc.
+          admin2: result.admin2,  // Roma, ecc.
+          admin3: result.admin3,  // Roma, ecc.
+          timezone: result.timezone,
+          population: result.population,
+          postcodes: result.postcodes,
+          country: result.country  // Italia, ecc.
         });
       }
     }

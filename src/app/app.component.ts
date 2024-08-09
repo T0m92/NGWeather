@@ -7,6 +7,7 @@ import { WeatherComponent } from "./weather/weather.component";
 //importazioni per la localizzazione italiana
 import localeIt from '@angular/common/locales/it';
 import { registerLocaleData } from '@angular/common';
+import { SearchBarComponent } from "./search-bar/search-bar.component";
 
 registerLocaleData(localeIt,'it');//registro i dati della localizz. per poter usare la localitá italiana (mesi ecc.. in it)
 
@@ -14,10 +15,10 @@ registerLocaleData(localeIt,'it');//registro i dati della localizz. per poter us
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
+    CommonModule,
     HttpClientModule,
     WeatherComponent,
-    
+    SearchBarComponent
 ],
   providers: [WeatherService,
     { provide: LOCALE_ID, useValue: 'it' } // aggiunto per le impostazioni di data (nomi di mesi e gg settimana in italiano)
