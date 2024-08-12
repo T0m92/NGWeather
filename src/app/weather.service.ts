@@ -20,12 +20,14 @@ export class WeatherService {
     this.coordinates.next({ latitude, longitude });
   }
 
+  // Nella get alla fine &timezone=auto serve per fare si che la timezone sia calcolata automaticamente in base alla localitá richiesta
+  // cioé i dati meteo ricevuti faranno riferimento a livello orario al fuso orario del luogo di cui si cercano le previsioni
   getWeatherData(): Observable<DailyWeatherData[]> {
     return this.coordinates.asObservable().pipe(
       switchMap(coords => {
         if (coords) {
           const { latitude, longitude } = coords;
-          return this.http.get<any>(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m`).pipe(
+          return this.http.get<any>(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m&timezone=auto`).pipe(
             map(response => this.transformWeatherData(response))
           );
         }
