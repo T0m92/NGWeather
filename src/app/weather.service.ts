@@ -27,7 +27,7 @@ export class WeatherService {
       switchMap(coords => {
         if (coords) {
           const { latitude, longitude } = coords;
-          return this.http.get<any>(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m&timezone=auto`).pipe(
+          return this.http.get<any>(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m,weather_code&timezone=auto`).pipe(
             map(response => this.transformWeatherData(response))
           );
         }
@@ -54,7 +54,8 @@ export class WeatherService {
             relativeHumidity2m: hourly.relative_humidity_2m[j].toFixed(1),
             apparentTemperature: hourly.apparent_temperature[j].toFixed(1),
             precipitationProbability: hourly.precipitation_probability[j].toFixed(1),
-            windSpeed10m: hourly.wind_speed_10m[j].toFixed(1)
+            windSpeed10m: hourly.wind_speed_10m[j].toFixed(1),
+            weather_code: hourly.weather_code[j]  //aggiunta per il weather code. vedere il model
           });
         }
 
