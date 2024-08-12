@@ -7,6 +7,9 @@
             [class.selected]="selectedDayIndex === i">
       {{ day.date | date: 'EEE dd' }}
       <br>
+        <!-- inserisci qui l'immagine e la logica di condizionamento della sua scelta in funzione della variabile dailyWeatherCodes -->
+         <img src="../../assets/01_day.png">
+      <br>
       {{maxMin[i]}}
     </button>
 
