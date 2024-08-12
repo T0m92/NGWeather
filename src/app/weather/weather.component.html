@@ -5,7 +5,9 @@
             class="daySelector" 
             (click)="selectDay(i)"
             [class.selected]="selectedDayIndex === i">
-      {{ day.date | date: 'EEE dd/MM' }}
+      {{ day.date | date: 'EEE dd' }}
+      <br>
+      {{maxMin[i]}}
     </button>
 
     <!-- I dettagli del giorno selezionato -->

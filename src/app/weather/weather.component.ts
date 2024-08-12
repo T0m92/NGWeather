@@ -18,20 +18,49 @@ import { noop } from 'rxjs';
 })
 export class WeatherComponent implements OnInit {
 
-  dailyWeatherData: DailyWeatherData[]=[];
-  selectedDayIndex: number|null = null; //cioé la variabile puó essere di tipo string OR null ed é attualmente uguale a null
+  dailyWeatherData: DailyWeatherData[] = [];
+  selectedDayIndex: number | null = null; //cioé la variabile puó essere di tipo string OR null ed é attualmente uguale a null
+
+  //creo un vettore max/min che per ogni elemento contiene la stringa [temperatura_massima_giornaliera/temperatura_minima_giornaliera]
+  maxMin: string[] = []; //inizializzato vuoto
+
+
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.weatherService.getWeatherData().subscribe(data => {
       this.dailyWeatherData = data;
+      this.getDailyMaxMin(); //richiamo in init la funzione per popolare il vettore maxMin subito dopo aver recuperato i dati completi dal service
       console.log("Dati ricevuti: ", data);  // Stampa i dati ricevuti in console
     });
   }
 
-  selectDay(index:number){
+  selectDay(index: number) {
     this.selectedDayIndex = index === this.selectedDayIndex ? null : index; // Seleziona o deseleziona il giorno
+  }
+
+  getDailyMaxMin() {
+    this.maxMin = []; //resetto il vettore maxMin in caso venga chiamato piú volte
+    //prende i dati dal WeatherService tramite il metodo getWeatherData e costruisce il vettore di stringhe
+    for (var i = 0; i < this.dailyWeatherData.length; i++) {
+      //creo una variabile che contiene ora per ora i dati del singolo giorno
+      //dailyWeatherData contiene tutti i dati di tutti i giorni ma non si puó accedere direttamente al dato del singolo giorno
+      const hourlyData = this.dailyWeatherData[i].hourlyData;
+      
+      //estraggo le temp del giorno corrente (cioé tutte le temp di un dato giorno dalle 00 alle 23)
+      const temperatures = hourlyData.map(hour =>hour.temperature2m);
+      //trovo la massima e la minima
+      // i tre punti di sospensione sono l'OPERATORE DI SPREAD che in javascript serve ad espandere nei singoli elementi un vettore molto grande o di cui non si conosce la dimensione
+      // il vantaggio risiede nel realizzare codice conciso e molto pratico
+      //Si puó usare l'operatore di spread per unire array, copiare array, passare array come argomenti, ecc.
+      const maxTemp = Math.max(...temperatures);
+      const minTemp = Math.min(...temperatures);
+      // creo la stringa formattata e la aggiungo al vettore maxMin
+      this.maxMin.push(`${maxTemp.toFixed(1)}/${minTemp.toFixed(1)}ºC`);
+    }
+    //print di controllo
+    console.log("Temperatura massima e minima per giorno: ", this.maxMin);
   }
 
 }
