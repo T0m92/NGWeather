@@ -14,7 +14,7 @@ export interface HourlyWeatherData {
     apparentTemperature: number;
     precipitationProbability: number;
     windSpeed10m: number;
-    weather_code: number; //serve per avere una descrizione esplicativa del meteo sotto forma di numero.. ora lo tratto TEMPORANEAMENTE come stringa 
+    weather_code: number; //serve per avere una descrizione esplicativa del meteo sotto forma di numero 
   }
   /*DailyWeatherData é un'interfaccia che rappresenta invece un intero giorno di dati metereologici.
   Infatti l'interfaccia é composta da una data di riferimento e un vettore di dati meteo per singola ora
