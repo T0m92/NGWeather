@@ -1,16 +1,25 @@
-<!-- weather.component.html -->
-<div *ngIf="dailyWeatherData.length">
-  <div *ngFor="let day of dailyWeatherData">
-    <h3>{{ day.date | date: 'fullDate' }}</h3>
-    <ul>
-      <li *ngFor="let hour of day.hourlyData">
-        {{ hour.dateTime | date: 'HH:mm' }} - 
-        Temp: {{ hour.temperature2m }}°C, 
-        Umidità: {{ hour.relativeHumidity2m }}%, 
-        Temp Percepita: {{ hour.apparentTemperature }}°C, 
-        Prob Pioggia: {{ hour.precipitationProbability }}%, 
-        Vento: {{ hour.windSpeed10m }} km/h
-      </li>
-    </ul>
+<ng-container *ngIf="dailyWeatherData.length">
+  <div class="dayContainer">
+    <!-- I pulsanti devono essere figli diretti della griglia per essere posizionati correttamente -->
+    <button *ngFor="let day of dailyWeatherData; let i = index" 
+            class="daySelector" 
+            (click)="selectDay(i)"
+            [class.selected]="selectedDayIndex === i">
+      {{ day.date | date: 'EEE dd/MM' }}
+    </button>
+
+    <!-- I dettagli del giorno selezionato -->
+    <div class="dayDetails" *ngIf="selectedDayIndex !== null">
+      <ul>
+        <li *ngFor="let hour of dailyWeatherData[selectedDayIndex].hourlyData">
+          {{ hour.dateTime | date: 'HH:mm' }} -
+          Temp: {{ hour.temperature2m }}°C,
+          Umidità: {{ hour.relativeHumidity2m }}%,
+          Temp Percepita: {{ hour.apparentTemperature }}°C,
+          Prob Pioggia: {{ hour.precipitationProbability }}%,
+          Vento: {{ hour.windSpeed10m }} km/h
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</ng-container>

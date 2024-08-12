@@ -1,0 +1,46 @@
+ /*contenitore di tutto il component*/
+ .searchBarContainer{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+ 
+}
+
+/*barra di ricerca*/
+.search-input{
+    height: 50px;
+    box-sizing: border-box;
+    width:60%;
+    border-radius: 25px;
+    text-align: center;
+}
+
+/*contenitore pulsanti di selezione cittá*/
+.citySelection{
+    width: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin: 5px;
+    text-align: center;
+    display:block;
+}
+
+.info-city{
+    height: 30px;
+    padding-left: 0;
+}
+
+
+
+ul{
+    list-style-type: none; /*rimuovo i pallini dalle liste ul*/
+}
+
+
+/*mi serve per delimitare gli spazi e capire dove stanno le varie cose*/
+header, nav, section, article, aside, footer, div {
+    border: 2px solid red;  /* Cambia il colore per altre sezioni */
+    background-color: rgba(255, 0, 0, 0.1);  /* Usa colori diversi per ogni sezione */
+    padding: 10px;
+}

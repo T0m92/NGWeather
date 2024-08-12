@@ -1,0 +1,20 @@
+.dayContainer {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 colonne equispaziate */
+    grid-template-rows: auto 1fr; /* Altezza automatica per la prima riga, e 1fr per la seconda */
+    gap: 10px; /* Spaziatura tra gli elementi della griglia */
+    width: 100%; /* Assicurati che la griglia occupi l'intera larghezza */
+}
+
+.daySelector {
+    grid-row: 1;
+    /* Posiziona tutti gli elementi .daySelector nella prima riga */
+}
+
+.dayDetails {
+    grid-row: 2; /* Posiziona l'elemento nella seconda riga */
+    grid-column: span 7; /* Estende l'elemento su tutte le colonne da 1 a 7 */
+    padding: 10px;
+    border: 2px solid green; /* Bordo per visualizzare chiaramente i dettagli */
+    background-color: #f9f9f9; /* Colore di sfondo per distinguere la sezione */
+}
