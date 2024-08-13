@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+/* Incluso i font icons vedere anche cartelle aggiunte assets/fonts e assets/styles */
+@font-face {
+    font-family: 'WeatherIcons';
+    src: url('/assets/fonts/weathericons-regular-webfont.eot');
+    src: url('/assets/fonts/weathericons-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/weathericons-regular-webfont.woff2') format('woff2'),
+         url('/assets/fonts/weathericons-regular-webfont.woff') format('woff'),
+         url('/assets/fonts/weathericons-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  

@@ -6,10 +6,28 @@
     width: 100%; /* Assicurati che la griglia occupi l'intera larghezza */
 }
 
+/*pulsante di selezione giorno*/
+
 .daySelector {
     grid-row: 1;
+    border-radius: 100px;
     /* Posiziona tutti gli elementi .daySelector nella prima riga */
 }
+
+/* Stile per il pulsante selezionato */
+.daySelector.selected {
+    background-color: #4CAF50; /* Colore di sfondo quando è selezionato */
+    color: white; /* Colore del testo quando è selezionato */
+    transform: scale(1.05); /* Leggera ingrandimento del pulsante */
+    border: 2px solid #4CAF50; /* Bordo verde per il pulsante selezionato */
+}
+
+.daySelector:hover {
+    cursor: pointer; /* Cambia il cursore in una mano per indicare che è cliccabile */
+    background-color: #d0d0d0; /* Colore di sfondo quando si passa sopra con il mouse */
+}
+
+/*fine pulsante selezione giorno*/
 
 .dayDetails {
     grid-row: 2; /* Posiziona l'elemento nella seconda riga */
@@ -17,4 +35,8 @@
     padding: 10px;
     border: 2px solid green; /* Bordo per visualizzare chiaramente i dettagli */
     background-color: #f9f9f9; /* Colore di sfondo per distinguere la sezione */
+}
+
+ul{
+    list-style-type:none;
 }

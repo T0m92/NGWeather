@@ -20,20 +20,17 @@ export class WeatherComponent implements OnInit {
   dailyWeatherData: DailyWeatherData[] = [];
   selectedDayIndex: number | null = null; //cioé la variabile puó essere di tipo string OR null ed é attualmente uguale a null
 
-  //creo un vettore max/min che per ogni elemento contiene la stringa [temperatura_massima_giornaliera/temperatura_minima_giornaliera]
   maxMin: string[] = []; //inizializzato vuoto
-
-  hourlyWeatherCodes: number[] = []; //vettore dei weather_code ora per ora di un giorno intero
-  dailyWeatherCodes: number[][] = []; /*vettore di vettori per raggruppare i weather code ora per ora di ogni giorno
- quindi una matrice che ha per indice di riga l'ora e per indice di colonna il giorno*/
+  dailyWeatherClasses: string[][] = []; //Vettore di vettori per le classi CSS di ogni ora di ogni giorno
+  severeWeatherClass: string[] = []; // Vettore per la classe CSS più severa di ogni giorno
 
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.weatherService.getWeatherData().subscribe(data => {
       this.dailyWeatherData = data;
-      this.getDailyMaxMin(); //richiamo in init la funzione per popolare il vettore maxMin subito dopo aver recuperato i dati completi dal service
-      this.getWeatherCodes(); //richiamo in init la funzione per ottenere tutti i weather_code
+      this.getDailyMaxMin(); // Popolare il vettore maxMin
+      this.processWeatherCodes(); // Popolare i vettori delle classi CSS
       console.log("Dati ricevuti: ", data);  // Stampa i dati ricevuti in console
     });
   }
@@ -43,42 +40,48 @@ export class WeatherComponent implements OnInit {
   }
 
   getDailyMaxMin() {
-    this.maxMin = []; //resetto il vettore maxMin in caso venga chiamato piú volte
-    //prende i dati dal WeatherService tramite il metodo getWeatherData e costruisce il vettore di stringhe
+    this.maxMin = []; // Resetto il vettore maxMin in caso venga chiamato più volte
     for (var i = 0; i < this.dailyWeatherData.length; i++) {
-      //creo una variabile che contiene ora per ora i dati del singolo giorno
-      //dailyWeatherData contiene tutti i dati di tutti i giorni ma non si puó accedere direttamente al dato del singolo giorno
       const hourlyData = this.dailyWeatherData[i].hourlyData;
-
-      //estraggo le temp del giorno corrente (cioé tutte le temp di un dato giorno dalle 00 alle 23)
       const temperatures = hourlyData.map(hour => hour.temperature2m);
-      //trovo la massima e la minima
-      // i tre punti di sospensione sono l'OPERATORE DI SPREAD che in javascript serve ad espandere nei singoli elementi un vettore molto grande o di cui non si conosce la dimensione
-      // il vantaggio risiede nel realizzare codice conciso e molto pratico
-      //Si puó usare l'operatore di spread per unire array, copiare array, passare array come argomenti, ecc.
       const maxTemp = Math.max(...temperatures);
       const minTemp = Math.min(...temperatures);
-      // creo la stringa formattata e la aggiungo al vettore maxMin
       this.maxMin.push(`${maxTemp.toFixed(1)}/${minTemp.toFixed(1)}ºC`);
     }
-    //print di controllo
     console.log("Temperatura massima e minima per giorno: ", this.maxMin);
   }
 
-  getWeatherCodes() {
-    //resetto i vettori in caso di riutilizzo
-    this.hourlyWeatherCodes = [];
-    this.dailyWeatherCodes = [];
-
-    //itero sui giorni presenti in dailyWeatherData
-    for (let i = 0; i < this.dailyWeatherData.length; i++) {
-      const hourlyData = this.dailyWeatherData[i].hourlyData;
-      // Creo un vettore temporaneo per contenere i weather_code di ogni ora del giorno corrente
-      const weatherCodesForDay: number[] = hourlyData.map(hour => hour.weather_code);
-      //aggiungo i weather_code del giorno corrente al vettore dailyWeatherCodes
-      this.dailyWeatherCodes.push(weatherCodesForDay);
-    }
-    console.log("Weather codes giornalieri: ",this.dailyWeatherCodes);
+  // Mappa i codici WMO alle classi CSS delle icone
+  mapWmoToCssClass(code: number): string {
+    if (code === 0 || code === 1) return 'wi-day-sunny';
+    if (code === 2) return 'wi-day-cloudy';
+    if (code === 3) return 'wi-cloudy';
+    if (code === 45 || code === 48) return 'wi-fog';
+    if (code >= 51 && code <= 55) return 'wi-showers';
+    if (code >= 56 && code <= 57) return 'wi-rain-mix';
+    if (code >= 61 && code <= 65) return 'wi-rain';
+    if (code >= 66 && code <= 67) return 'wi-rain-mix';
+    if (code >= 71 && code <= 77) return 'wi-snow';
+    if (code >= 80 && code <= 82) return 'wi-showers';
+    if (code >= 85 && code <= 86) return 'wi-snow';
+    if (code >= 95 && code <= 99) return 'wi-thunderstorm';
+    return ''; // Classe di default se non c'è una corrispondenza
   }
 
+  processWeatherCodes() {
+    this.dailyWeatherClasses = [];
+    this.severeWeatherClass = [];
+
+    for (let i = 0; i < this.dailyWeatherData.length; i++) {
+      const hourlyData = this.dailyWeatherData[i].hourlyData;
+      const weatherClassesForDay = hourlyData.map(hour => this.mapWmoToCssClass(hour.weather_code));
+      this.dailyWeatherClasses.push(weatherClassesForDay);
+
+      const maxWeatherCode = Math.max(...hourlyData.map(hour => hour.weather_code));
+      this.severeWeatherClass.push(this.mapWmoToCssClass(maxWeatherCode));
+    }
+
+    console.log("Classi CSS giornaliere: ", this.dailyWeatherClasses);
+    console.log("Classe CSS più severa per giorno: ", this.severeWeatherClass);
+  }
 }
