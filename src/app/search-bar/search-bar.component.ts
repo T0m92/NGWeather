@@ -44,9 +44,16 @@ export class SearchBarComponent implements OnInit {
   onSelectCity(city: LocationInfo): void {
     this.selectedCity = city;
     this.cities = [];
+  
     const { latitude, longitude } = city;
     this.weatherService.setCoordinates(latitude, longitude);
+  
+    // Aggiorna il campo di input con il nome della città selezionata
+    this.searchForm.patchValue({
+      cityName: `${city.name}, ${city.country_code}, ${city.admin1}`
+    });
   }
+  
 }
 
 /*ASSERZIONE DEFINITIVA

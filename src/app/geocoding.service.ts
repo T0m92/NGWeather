@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LocationInfo } from './models/geocoding.model';
-import { HttpClientJsonpModule } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'

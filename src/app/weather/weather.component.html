@@ -17,14 +17,14 @@
     <div class="dayDetails" *ngIf="selectedDayIndex !== null">
       <ul>
         <li *ngFor="let hour of dailyWeatherData[selectedDayIndex].hourlyData; let j = index">
+          <!-- Inserito qui l'icona proveniente da dailyWeatherClasses -->
+          <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex][j]"> </i>
           {{ hour.dateTime | date: 'HH:mm' }} -
           Temp: {{ hour.temperature2m }}°C,
           Umidità: {{ hour.relativeHumidity2m }}%,
           Temp Percepita: {{ hour.apparentTemperature }}°C,
           Prob Pioggia: {{ hour.precipitationProbability }}%,
           Vento: {{ hour.windSpeed10m }} km/h
-          <!-- Inserito qui l'icona proveniente da dailyWeatherClasses -->
-          <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex][j]"></i>
         </li>
       </ul>
     </div>
