@@ -1,42 +1,88 @@
+.weather-component-container{
+    display:grid;
+    grid-template-rows: 1fr 1fr auto;
+}
+
 .dayContainer {
     display: grid;
     grid-template-columns: repeat(7, 1fr); /* 7 colonne equispaziate */
-    grid-template-rows: auto 1fr; /* Altezza automatica per la prima riga, e 1fr per la seconda */
     gap: 10px; /* Spaziatura tra gli elementi della griglia */
-    width: 100%; /* Assicurati che la griglia occupi l'intera larghezza */
+    width: calc(100% - 20px); /* Assicurati che la griglia occupi l'intera larghezza -20px per i margini */
+    margin-top: 0px; /*per non schiacciare le tab al limite del container*/
+    margin-bottom:10px;
+    padding:10px; /*per creare il margine che distacca le card da questo container*/
+    background-image: url('../../assets/images/meteo_1200x675.jpg');
+    background-size: cover;
 }
 
-/*pulsante di selezione giorno*/
-
+/* Pulsante di selezione giorno */
 .daySelector {
-    grid-row: 1;
-    border-radius: 100px;
-    /* Posiziona tutti gli elementi .daySelector nella prima riga */
+    aspect-ratio: 1 / 1.5; /* Imposta il rapporto base:altezza a 1:1.5 */
+    width: 100%; /* Occupa il 100% della colonna disponibile */
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column; /* Disposizione in colonna */
+    justify-content: space-between; /* Spazio tra gli elementi */
+    align-items: center;
+    /* padding: 10px; */
+    text-align: center;
+    padding:10px;
+    /*tessere effetto vetro smerigliato*/
+    background-color: rgba(255, 255, 255, 0.3); /* Colore bianco con trasparenza */
+    backdrop-filter: blur(10px); /* Effetto vetro smerigliato */
+    -webkit-backdrop-filter: blur(10px); /* Supporto per Safari */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Bordo semi-trasparente */
+}
+
+
+.daySelector .date-text, 
+.daySelector .temperature-text {
+    display: block;
+    font-weight: bold; /* Testo in grassetto */
+    font-size: 1.5rem; /* Aumenta la dimensione del testo */
+    text-align: center;
+    margin: 30px 0; /* Aggiungi rientro verticale */
+}
+
+.daySelector .icon {
+    font-size: 5rem; /* Ingrandisci l'icona centrale */
+    margin: 5px 0; /* Riduci il margine sopra e sotto l'icona */
+}
+
+/*striscia con le temperature del giorno scelto (tabella)*/
+.temperature-details{
+    /* display: flex; */
+    grid-row: 2;
+    grid-column: span 7;
+    padding: 10px;
 }
 
 /* Stile per il pulsante selezionato */
 .daySelector.selected {
-    background-color: #4CAF50; /* Colore di sfondo quando è selezionato */
-    color: white; /* Colore del testo quando è selezionato */
-    transform: scale(1.05); /* Leggera ingrandimento del pulsante */
-    border: 2px solid #4CAF50; /* Bordo verde per il pulsante selezionato */
+    background-color: #4CAF50;
+    color: white;
+    border: 2px solid #4CAF50;
 }
 
+/* Hover effect */
 .daySelector:hover {
-    cursor: pointer; /* Cambia il cursore in una mano per indicare che è cliccabile */
-    background-color: #d0d0d0; /* Colore di sfondo quando si passa sopra con il mouse */
+    cursor: pointer;
+    background-color: #d0d0d0;
 }
 
-/*fine pulsante selezione giorno*/
-
+/* Dettagli del giorno selezionato */
 .dayDetails {
-    grid-row: 2; /* Posiziona l'elemento nella seconda riga */
-    grid-column: span 7; /* Estende l'elemento su tutte le colonne da 1 a 7 */
+    grid-row: 3;
+    font-size: 1.5rem;
+    size: 95%;
+    grid-column: span 7;
     padding: 10px;
-    border: 2px solid green; /* Bordo per visualizzare chiaramente i dettagli */
-    background-color: #f9f9f9; /* Colore di sfondo per distinguere la sezione */
+    border: 2px solid green;
+    background-color: #f9f9f9;
 }
 
-ul{
-    list-style-type:none;
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }

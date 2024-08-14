@@ -1,32 +1,30 @@
-<ng-container *ngIf="dailyWeatherData.length">
-  <div class="dayContainer">
-    <!-- I pulsanti devono essere figli diretti della griglia per essere posizionati correttamente -->
-    <button *ngFor="let day of dailyWeatherData; let i = index" 
-            class="daySelector" 
-            (click)="selectDay(i)"
-            [class.selected]="selectedDayIndex === i">
-      {{ day.date | date: 'EEE dd' }}
-      <br>
-      <!-- Inserito qui l'icona proveniente da severeWeatherClass -->
-      <i [class]="'wi ' + severeWeatherClass[i]"></i>
-      <br>
-      {{ maxMin[i] }}
-    </button>
-
-    <!-- I dettagli del giorno selezionato -->
-    <div class="dayDetails" *ngIf="selectedDayIndex !== null">
-      <ul>
-        <li *ngFor="let hour of dailyWeatherData[selectedDayIndex].hourlyData; let j = index">
-          <!-- Inserito qui l'icona proveniente da dailyWeatherClasses -->
-          <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex][j]"> </i>
-          {{ hour.dateTime | date: 'HH:mm' }} -
-          Temp: {{ hour.temperature2m }}°C,
-          Umidità: {{ hour.relativeHumidity2m }}%,
-          Temp Percepita: {{ hour.apparentTemperature }}°C,
-          Prob Pioggia: {{ hour.precipitationProbability }}%,
-          Vento: {{ hour.windSpeed10m }} km/h
-        </li>
-      </ul>
+<ng-container class="wetaher-component-container" *ngIf="dailyWeatherData.length">
+  <ng-container *ngIf="dailyWeatherData.length">
+    <div class="dayContainer">
+      <button *ngFor="let day of dailyWeatherData; let i = index" class="daySelector" (click)="selectDay(i)"
+        [class.selected]="selectedDayIndex === i">
+        <span class="date-text">{{ day.date | date: 'EEE dd' }}</span>
+        <div class="icon">
+          <i [class]="'wi ' + severeWeatherClass[i]"></i>
+        </div>
+        <span class="temperature-text">{{ maxMin[i] }}</span>
+      </button>
     </div>
+  </ng-container>
+
+  <!-- inserisci lo swiper qui  -->
+
+  <div class="dayDetails" *ngIf="selectedDayIndex !== null">
+    <ul>
+      <li *ngFor="let hour of dailyWeatherData[selectedDayIndex].hourlyData; let j = index">
+        <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex][j]"> </i>
+        {{ hour.dateTime | date: 'HH:mm' }} -
+        Temp: {{ hour.temperature2m }}°C,
+        Umidità: {{ hour.relativeHumidity2m }}%,
+        Temp Percepita: {{ hour.apparentTemperature }}°C,
+        Prob Pioggia: {{ hour.precipitationProbability }}%,
+        Vento: {{ hour.windSpeed10m }} km/h
+      </li>
+    </ul>
   </div>
 </ng-container>

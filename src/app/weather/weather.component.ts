@@ -1,9 +1,10 @@
 // weather.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit} from '@angular/core';
 import { WeatherService } from '../weather.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { DailyWeatherData } from '../models/weather-data.model';
 import { BaseChartDirective } from 'ng2-charts'; //per i grafici
+
 
 @Component({
   selector: 'app-weather',
@@ -46,7 +47,7 @@ export class WeatherComponent implements OnInit {
       const temperatures = hourlyData.map(hour => hour.temperature2m);
       const maxTemp = Math.max(...temperatures);
       const minTemp = Math.min(...temperatures);
-      this.maxMin.push(`${maxTemp.toFixed(1)}/${minTemp.toFixed(1)}ºC`);
+      this.maxMin.push(`${maxTemp.toFixed(1)} / ${minTemp.toFixed(1)}º`);
     }
     console.log("Temperatura massima e minima per giorno: ", this.maxMin);
   }

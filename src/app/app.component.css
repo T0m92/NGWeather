@@ -1,47 +1,23 @@
-/*divido lo spazio in una colonna e 2 righe, un aper component*/
-.app-container{
+.app-container {
     display: grid;
-    grid-template: 1fr,4fr,1fr; 
-    /*
-    Divido LO SPAZIO vericalmente in 6
-    Di questi 6 sesti ne do:
-    1/6 allo spacer-sx <=> 1fr
-    4/6 al contenuto <=> 4fr 
-    1/6 allo spacer-dx <=> 1fr
-    Cosí ottengo 3 COLONNE con uno spazio ben suddiviso
-    */
-    
+    grid-template-rows: 1fr 5fr 1fr;
+    height: 100vh; /* Assicurati che l'altezza totale sia 100% della viewport */
 }
 
-.spacer-dx{
-    background-color: black;
-    grid-column: 3/4;/*4 linee delimitano 3 colonne. 
-    per delimitare la colonna centrale devo dare la linea 2 e la linea 3 infatti scrivo 2/3
-    questo é utile se un elemento deve estendersi tra piú colonne. altrimenti basta mettere il numero della colonna */
-}
-.spacer-sx{
-    background-color: black;
-    grid-column: 1;/*per il discorso di sopra, potevo scrivere 1/2 ma per mostrare i vari esempi scrivo 1 e basta*/
+.spacer-dx, .spacer-sx {
+    background-color: rgb(255, 255, 255);
 }
 
-app-search-bar{
-    grid-column:2;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.spacer-dx {
+    grid-row: 1 / span 3;
+    grid-column: 3;
 }
 
-app-weather{
-    grid-column: 2/3;
-    display: flex;
-    flex-direction: column;
-
+.spacer-sx {
+    grid-row: 1 / span 3;
+    grid-column: 1;
 }
 
-/*mi serve per delimitare gli spazi e capire dove stanno le varie cose*/
-header, nav, section, article, aside, footer, div {
-    border: 2px solid green;  /* Cambia il colore per altre sezioni */
-    background-color: rgba(255, 0, 0, 0.1);  /* Usa colori diversi per ogni sezione */
-    padding: 10px;
+app-search-bar, app-weather {
+    grid-column: 2;
 }

@@ -1,46 +1,70 @@
- /*contenitore di tutto il component*/
- .searchBarContainer{
-    width: 100%;
-    padding: 20px;
+/* contenitore di tutto il component */
+.searchBarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Occupa tutta l'altezza disponibile nel container */
+    padding: 0; /* Elimina il padding per evitare il ridimensionamento */
     box-sizing: border-box;
     text-align: center;
- 
+    background-color: rgb(31, 70, 82); /* Colore di sfondo */
 }
 
-/*barra di ricerca*/
-.search-input{
-    height: 50px;
-    box-sizing: border-box;
-    width:60%;
+.search-input {
+    width: 80vh; /* Usa la larghezza e altezza in vh per garantire la responsività */
+    height: 5vh;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
     border-radius: 25px;
     text-align: center;
+    box-sizing: border-box;
+    font-size: 1.5vw; /* Font dimensionato in base alla larghezza della viewport */
+    font-weight: 600;/*bold 1200 semi-bold 600 e giu cosí*/
+    overflow: hidden; /* Nasconde l'overflow */
+    text-overflow: ellipsis; /* Mostra i puntini di sospensione per il testo che esce dal contenitore */
 }
 
-/*contenitore pulsanti di selezione cittá*/
-.citySelection{
+/* contenitore pulsanti di selezione città */
+.citySelection {
     width: 100%;
+    height: 4vh; /* Aumenta l'altezza per renderli più visibili */
     border-radius: 10px;
     box-sizing: border-box;
-    margin: 5px;
+    margin: 10px 0; /* Spazio tra i pulsanti */
     text-align: center;
-    display:block;
+    font-weight: bold;
+    font-size: 1.2rem; /* Dimensione del testo leggermente ridotta */
+    display: flex;
+    align-items: center; /* Centra verticalmente il contenuto */
+    justify-content: center; /* Centra orizzontalmente il contenuto */
+    background-color: rgba(255, 255, 255, 0.2); /*Colore bianco con trasparenza*/
+    backdrop-filter: blur(10px); /* Effetto vetro smerigliato */
+    -webkit-backdrop-filter: blur(10px); /* Supporto per Safari */
+    border: 1px solid rgba(255, 255, 255, 0.18); /* Bordo semi-trasparente */
 }
 
-.info-city{
-    height: 30px;
-    padding-left: 0;
+.info-city {
+    font-size: 1rem; /* Riduce la dimensione del testo per evitare overflow */
 }
 
-
-
-ul{
-    list-style-type: none; /*rimuovo i pallini dalle liste ul*/
+ul {
+    list-style-type: none; /* Rimuove i pallini dalle liste ul */
+    padding: 0px;
+    margin-bottom: 55px;
 }
 
+.autocomplete-city {
+    width: 90%;
+    height: 100%;
+}
 
-/*mi serve per delimitare gli spazi e capire dove stanno le varie cose*/
-header, nav, section, article, aside, footer, div {
-    border: 2px solid red;  /* Cambia il colore per altre sezioni */
-    background-color: rgba(255, 0, 0, 0.1);  /* Usa colori diversi per ogni sezione */
-    padding: 10px;
+.size-btn-atuocomplete {
+    height: 4vh; /* Imposta la stessa altezza dei pulsanti */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
