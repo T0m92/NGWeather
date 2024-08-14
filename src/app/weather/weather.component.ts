@@ -25,6 +25,12 @@ export class WeatherComponent implements OnInit {
   dailyWeatherClasses: string[][] = []; //Vettore di vettori per le classi CSS di ogni ora di ogni giorno
   severeWeatherClass: string[] = []; // Vettore per la classe CSS più severa di ogni giorno
 
+    // Proprietà per il grafico
+    lineChart: any;
+    lineChartOptions: any;
+    chartColor: string = '#FF5733'; // Colore fisso per il grafico
+    //
+
   constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
@@ -32,12 +38,58 @@ export class WeatherComponent implements OnInit {
       this.dailyWeatherData = data;
       this.getDailyMaxMin(); // Popolare il vettore maxMin
       this.processWeatherCodes(); // Popolare i vettori delle classi CSS
+      this.initializeChart(); // Inizializza il grafico con i dati
       console.log("Dati ricevuti: ", data);  // Stampa i dati ricevuti in console
     });
   }
 
+    // Inizializza il grafico con i dati del giorno selezionato
+    initializeChart() {
+      if (this.selectedDayIndex !== null) {
+        const selectedDayData = this.dailyWeatherData[this.selectedDayIndex];
+        const labels = selectedDayData.hourlyData.map((_, index) => `${index}:00`);
+        const temperatures = selectedDayData.hourlyData.map(hour => hour.temperature2m);
+  
+        this.lineChart = {
+          labels: labels,
+          datasets: [{
+            label: `Temperatura Giornaliera`,
+            data: temperatures,
+            fill: false,
+            borderColor: this.chartColor, // Usa il colore fisso
+            tension: 0.1
+          }]
+        };
+  
+        this.lineChartOptions = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Ora del Giorno'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Temperatura (ºC)'
+              },
+              beginAtZero: false
+            }
+          }
+        };
+      }
+    }
+
   selectDay(index: number) {
     this.selectedDayIndex = index === this.selectedDayIndex ? null : index; // Seleziona o deseleziona il giorno
+    this.initializeChart(); //Aggiorna il grafico quando viene selezionato un giorno
   }
 
   getDailyMaxMin() {

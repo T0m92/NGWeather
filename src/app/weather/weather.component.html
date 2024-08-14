@@ -12,10 +12,17 @@
     </div>
   </ng-container>
 
-  <!-- inserisci lo swiper qui  -->
 
   <div class="dayDetails" *ngIf="selectedDayIndex !== null">
-    <ul>
+    <!-- inserisci il grafico qui  -->
+    <canvas baseChart [data]="lineChart" [options]="lineChartOptions" [type]="'line'"></canvas>
+    <!---->
+  </div>
+</ng-container>
+
+<!-- 
+
+<ul>
       <li *ngFor="let hour of dailyWeatherData[selectedDayIndex].hourlyData; let j = index">
         <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex][j]"> </i>
         {{ hour.dateTime | date: 'HH:mm' }} -
@@ -26,5 +33,5 @@
         Vento: {{ hour.windSpeed10m }} km/h
       </li>
     </ul>
-  </div>
-</ng-container>
+
+-->

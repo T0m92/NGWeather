@@ -7,5 +7,5 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),provideClientHydration(),provideHttpClient(), provideCharts(withDefaultRegisterables())]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),provideClientHydration(),provideHttpClient(), provideCharts(withDefaultRegisterables()), provideCharts(withDefaultRegisterables())]
 };
