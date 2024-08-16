@@ -9,7 +9,7 @@
     gap: 10px; /* Spaziatura tra gli elementi della griglia */
     width: calc(100% - 20px); /* Assicurati che la griglia occupi l'intera larghezza -20px per i margini */
     margin-top: 0px; /*per non schiacciare le tab al limite del container*/
-    margin-bottom:10px;
+    margin-bottom:0px;
     padding:10px; /*per creare il margine che distacca le card da questo container*/
     background-image: url('../../assets/images/meteo_1200x675.jpg');
     background-size: cover;
@@ -76,13 +76,60 @@
     font-size: 1.5rem;
     size: 95%;
     grid-column: span 7;
+    align-content: center;
+    justify-content: center;
     padding: 10px;
-    border: 2px solid green;
+    /* border: 2px solid green; */
     background-color: #f9f9f9;
+}
+
+/*aggunto per limitare l'espansione del grafico che fa crashare il layout della pagina*/
+.dayDetails canvas {
+    min-width: 100%; /* Imposta una larghezza massima per evitare che il canvas diventi troppo largo */
+    max-height: 400px; /* Imposta un'altezza massima per evitare che diventi troppo alto */
+    padding-top: 40px;
 }
 
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+/* AGGIUNTA DI STILE PER LA BARRA DI SELEZIONE DEL TIPO DI DATO DEL GRAFICO */
+
+.dataTypeSelection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgb(31 70 82);
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 4.8em;
+    padding: 0;
+}
+
+.dataTypeSelection label {
+    font-size: 1.2rem; /* Dimensione del testo leggermente aumentata */
+    font-weight: bold; /* Testo in grassetto */
+    color: #ffffff; /* Colore del testo in armonia con lo schema di colori */
+    margin-right: 10px; /* Spaziatura tra label e select box */
+}
+
+.dataTypeSelection select {
+    font-size: 1rem; /* Dimensione del testo */
+    padding: 5px 10px; /* Spaziatura interna per il select */
+    border-radius: 5px; /* Angoli arrotondati */
+    border: 1px solid #1F4652; /* Bordo in armonia con lo schema di colori */
+    background-color: rgba(255, 255, 255, 0.7); /* Sfondo bianco leggermente trasparente */
+    color: #1F4652; /* Colore del testo */
+    font-weight: bold; /* Testo in grassetto */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+}
+
+.dataTypeSelection select:focus {
+    outline: none; /* Rimuove il bordo di focus standard */
+    border-color: #4CAF50; /* Cambia il colore del bordo al focus */
 }

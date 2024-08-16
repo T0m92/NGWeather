@@ -12,26 +12,21 @@
     </div>
   </ng-container>
 
+  <!--  Select box per input dati grafico -->
+
+  <div class="dataTypeSelection">
+    <label for="dataTypeSelect">Seleziona il tipo di dato:</label>
+    <select id="dataTypeSelect" [(ngModel)]="selectedDataType" (change)="updateChart()">
+      <option value="temperature2m">Temperatura</option>
+      <option value="rainProbability">Probabilitá di pioggia</option>
+      <option value="humidity">Umidità</option>
+      <option value="windSpeed">Velocità del Vento</option>
+      <option value="apparentTemperature">Temperatura Percepita</option>
+    </select>
+  </div>
 
   <div class="dayDetails" *ngIf="selectedDayIndex !== null">
-    <!-- inserisci il grafico qui  -->
+    <!-- grafico  -->
     <canvas baseChart [data]="lineChart" [options]="lineChartOptions" [type]="'line'"></canvas>
-    <!---->
   </div>
 </ng-container>
-
-<!-- 
-
-<ul>
-      <li *ngFor="let hour of dailyWeatherData[selectedDayIndex].hourlyData; let j = index">
-        <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex][j]"> </i>
-        {{ hour.dateTime | date: 'HH:mm' }} -
-        Temp: {{ hour.temperature2m }}°C,
-        Umidità: {{ hour.relativeHumidity2m }}%,
-        Temp Percepita: {{ hour.apparentTemperature }}°C,
-        Prob Pioggia: {{ hour.precipitationProbability }}%,
-        Vento: {{ hour.windSpeed10m }} km/h
-      </li>
-    </ul>
-
--->

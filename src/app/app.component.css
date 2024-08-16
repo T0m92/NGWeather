@@ -1,23 +1,16 @@
-.app-container {
-    display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
-    height: 100vh; /* Assicurati che l'altezza totale sia 100% della viewport */
-}
+    .app-container {
+        display: flex;
+        justify-content: center;
+        height: 100vh; /* Assicurati che l'altezza totale sia 100% della viewport */
+        padding-left: 1rem;  /* Puoi usare valori in px, rem o % a seconda delle tue esigenze */
+        padding-right: 1rem;
+    }
 
-.spacer-dx, .spacer-sx {
-    background-color: rgb(255, 255, 255);
-}
+    .content-container {
+        max-width: 1500px; /* Imposta una larghezza massima per il contenuto */
+        width: 100%; /* Occupa tutta la larghezza disponibile */
+    }
 
-.spacer-dx {
-    grid-row: 1 / span 3;
-    grid-column: 3;
-}
-
-.spacer-sx {
-    grid-row: 1 / span 3;
-    grid-column: 1;
-}
-
-app-search-bar, app-weather {
-    grid-column: 2;
-}
+    app-search-bar, app-weather {
+        width: 100%; /* Assicurati che i componenti occupino tutta la larghezza del container */
+    }
