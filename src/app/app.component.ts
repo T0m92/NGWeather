@@ -8,6 +8,8 @@ import { WeatherComponent } from "./weather/weather.component";
 import localeIt from '@angular/common/locales/it';
 import { registerLocaleData } from '@angular/common';
 import { SearchBarComponent } from "./search-bar/search-bar.component";
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
 
 registerLocaleData(localeIt,'it');//registro i dati della localizz. per poter usare la localitá italiana (mesi ecc.. in it)
 
@@ -18,7 +20,9 @@ registerLocaleData(localeIt,'it');//registro i dati della localizz. per poter us
     CommonModule,
     HttpClientModule,
     WeatherComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    HeaderComponent,
+    FooterComponent
 ],
   providers: [WeatherService,
     { provide: LOCALE_ID, useValue: 'it' } // aggiunto per le impostazioni di data (nomi di mesi e gg settimana in italiano)
@@ -27,26 +31,7 @@ registerLocaleData(localeIt,'it');//registro i dati della localizz. per poter us
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  // weatherData: any;
 
-  // constructor(private weatherService: WeatherService) {}
 
-  ngOnInit(): void {
-  //   this.weatherService.getWeather('52.52', '13.41').subscribe(data => {
-  //     this.processWeatherData(data);
-  //     console.log('sono nell init dei APP COMPONENT');
-  //   });
-  // }
-
-  // processWeatherData(data: any): void {
-  //   const utcOffsetSeconds = data.utc_offset_seconds;
-  //   const hourly = data.hourly;
-
-  //   this.weatherData = {
-  //     time: hourly.time.map((t: number) => new Date((t + utcOffsetSeconds) * 1000)),
-  //     temperature2m: hourly.temperature_2m
-  //   };
-  //   console.log('Sono in processWeatherData di APP COMPONENT ts e i dati sono:' + this.weatherData);
-  // }
-}
+  ngOnInit(): void {}
 }

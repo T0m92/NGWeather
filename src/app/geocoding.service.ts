@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map,catchError } from 'rxjs/operators';
 import { LocationInfo } from './models/geocoding.model';
+//of e catchError sono stati importati per la gestione degli errori
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,21 @@ export class GeocodingService {
     console.log('GeocodingService initialized');
   }
 
+  //gestione degli errori
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`); // Log dell'errore sulla console
+
+      // Restituisce un array vuoto o un valore di fallback per mantenere l'applicazione funzionante
+      return of(result as T);
+    };
+  }
+
   getGeocodingInfo(name: string): Observable<LocationInfo[]> {
     return this.http.get<any>(`https://geocoding-api.open-meteo.com/v1/search?name=${name}&count=10&language=it&format=json`)
       .pipe(
-        map(response => this.transformGeocodingInfo(response))
+        map(response => this.transformGeocodingInfo(response)),
+        catchError(this.handleError<LocationInfo[]>('getGeocodingInfo', [])) // Gestione degli errori
       );
   }
 

@@ -1,3 +1,4 @@
+<!-- card per selezione del giorno -->
 <ng-container class="wetaher-component-container" *ngIf="dailyWeatherData.length">
   <ng-container *ngIf="dailyWeatherData.length">
     <div class="dayContainer">
@@ -23,6 +24,16 @@
       <option value="windSpeed">Velocità del Vento</option>
       <option value="apparentTemperature">Temperatura Percepita</option>
     </select>
+  </div>
+
+  <!-- Fascia con le icone del meteo per ogni ora -->
+  <div class="hourly-weather-icons">
+    <div *ngFor="let hour of dailyWeatherData[selectedDayIndex!]?.hourlyData; let j = index" class="hourly-icon-container">
+      <div class="hourly-icon">
+        <i [class]="'wi ' + dailyWeatherClasses[selectedDayIndex!][j]"></i>
+      </div>
+      <div class="hourly-time">{{ j }}:00</div>
+    </div>
   </div>
 
   <div class="dayDetails" *ngIf="selectedDayIndex !== null">

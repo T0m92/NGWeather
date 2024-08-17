@@ -4,6 +4,7 @@
         height: 100vh; /* Assicurati che l'altezza totale sia 100% della viewport */
         padding-left: 1rem;  /* Puoi usare valori in px, rem o % a seconda delle tue esigenze */
         padding-right: 1rem;
+        
     }
 
     .content-container {

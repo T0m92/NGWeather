@@ -1,0 +1,35 @@
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.footer {
+    background-color: #2B3A42;
+    color: #cccccc;
+    padding: 2em 15em;
+    margin-top: 35em;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+ul {
+    display: flex;
+    /*Mette gli elementi della lista in orizzontale*/
+    justify-content: space-between;
+    /* Distribuisce lo spazio in modo uniforme tra gli elementi */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /*Assicura che il `ul` occupi tutta la larghezza del contenitore genitore*/
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    /*Fa si che l'intero li sia cliccabile*/
+    padding: 10px 0;
+    /* Aggiunge un po di padding per migliorare la cliccabilita*/
+}

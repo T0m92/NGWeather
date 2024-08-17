@@ -1,56 +1,80 @@
-.weather-component-container{
-    display:grid;
+.weather-component-container {
+    display: grid;
     grid-template-rows: 1fr 1fr auto;
 }
 
 .dayContainer {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 colonne equispaziate */
-    gap: 10px; /* Spaziatura tra gli elementi della griglia */
-    width: calc(100% - 20px); /* Assicurati che la griglia occupi l'intera larghezza -20px per i margini */
-    margin-top: 0px; /*per non schiacciare le tab al limite del container*/
-    margin-bottom:0px;
-    padding:10px; /*per creare il margine che distacca le card da questo container*/
+    grid-template-columns: repeat(7, 1fr);
+    /* 7 colonne equispaziate */
+    gap: 10px;
+    /* Spaziatura tra gli elementi della griglia */
+    width: calc(100% - 20px);
+    /* Assicurati che la griglia occupi l'intera larghezza -20px per i margini */
+    margin-top: 0px;
+    /*per non schiacciare le tab al limite del container*/
+    margin-bottom: 0px;
+    padding: 10px;
+    /*per creare il margine che distacca le card da questo container*/
     background-image: url('../../assets/images/meteo_1200x675.jpg');
     background-size: cover;
 }
 
 /* Pulsante di selezione giorno */
 .daySelector {
-    aspect-ratio: 1 / 1.5; /* Imposta il rapporto base:altezza a 1:1.5 */
-    width: 100%; /* Occupa il 100% della colonna disponibile */
+    flex-grow: 1;
+    /* Permette alle card di crescere per riempire lo spazio disponibile */
+    flex-shrink: 1;
+    /* Permette alle card di ridursi se lo spazio è limitato */
+    flex-basis: 0;
+    /* Imposta la base della flessibilità, in modo che le card abbiano dimensioni proporzionali */
+    aspect-ratio: 1 / 1.5;
+    /* Imposta il rapporto base:altezza a 1:1.5 */
+    width: 100%;
+    /* Occupa il 100% della colonna disponibile */
     border-radius: 25px;
     display: flex;
-    flex-direction: column; /* Disposizione in colonna */
-    justify-content: space-between; /* Spazio tra gli elementi */
+    flex-direction: column;
+    /* Disposizione in colonna */
+    justify-content: space-between;
+    /* Spazio tra gli elementi */
     align-items: center;
     /* padding: 10px; */
     text-align: center;
-    padding:10px;
+    padding: 10px;
     /*tessere effetto vetro smerigliato*/
-    background-color: rgba(255, 255, 255, 0.3); /* Colore bianco con trasparenza */
-    backdrop-filter: blur(10px); /* Effetto vetro smerigliato */
-    -webkit-backdrop-filter: blur(10px); /* Supporto per Safari */
-    border: 1px solid rgba(255, 255, 255, 0.18); /* Bordo semi-trasparente */
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Colore bianco con trasparenza */
+    backdrop-filter: blur(10px);
+    /* Effetto vetro smerigliato */
+    -webkit-backdrop-filter: blur(10px);
+    /* Supporto per Safari */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* Bordo semi-trasparente */
 }
 
 
-.daySelector .date-text, 
+.daySelector .date-text,
 .daySelector .temperature-text {
     display: block;
-    font-weight: bold; /* Testo in grassetto */
-    font-size: 1.5rem; /* Aumenta la dimensione del testo */
+    font-weight: bold;
+    /* Testo in grassetto */
+    font-size: 1.5rem;
+    /* Aumenta la dimensione del testo */
     text-align: center;
-    margin: 30px 0; /* Aggiungi rientro verticale */
+    margin: 30px 0;
+    /* Aggiungi rientro verticale */
 }
 
 .daySelector .icon {
-    font-size: 5rem; /* Ingrandisci l'icona centrale */
-    margin: 5px 0; /* Riduci il margine sopra e sotto l'icona */
+    font-size: 5rem;
+    /* Ingrandisci l'icona centrale */
+    margin: 5px 0;
+    /* Riduci il margine sopra e sotto l'icona */
 }
 
 /*striscia con le temperature del giorno scelto (tabella)*/
-.temperature-details{
+.temperature-details {
     /* display: flex; */
     grid-row: 2;
     grid-column: span 7;
@@ -85,8 +109,10 @@
 
 /*aggunto per limitare l'espansione del grafico che fa crashare il layout della pagina*/
 .dayDetails canvas {
-    min-width: 100%; /* Imposta una larghezza massima per evitare che il canvas diventi troppo largo */
-    max-height: 400px; /* Imposta un'altezza massima per evitare che diventi troppo alto */
+    min-width: 100%;
+    /* Imposta una larghezza massima per evitare che il canvas diventi troppo largo */
+    max-height: 400px;
+    /* Imposta un'altezza massima per evitare che diventi troppo alto */
     padding-top: 40px;
 }
 
@@ -112,24 +138,68 @@ ul {
 }
 
 .dataTypeSelection label {
-    font-size: 1.2rem; /* Dimensione del testo leggermente aumentata */
-    font-weight: bold; /* Testo in grassetto */
-    color: #ffffff; /* Colore del testo in armonia con lo schema di colori */
-    margin-right: 10px; /* Spaziatura tra label e select box */
+    font-size: 1.2rem;
+    /* Dimensione del testo leggermente aumentata */
+    font-weight: bold;
+    /* Testo in grassetto */
+    color: #ffffff;
+    /* Colore del testo in armonia con lo schema di colori */
+    margin-right: 10px;
+    /* Spaziatura tra label e select box */
 }
 
 .dataTypeSelection select {
-    font-size: 1rem; /* Dimensione del testo */
-    padding: 5px 10px; /* Spaziatura interna per il select */
-    border-radius: 5px; /* Angoli arrotondati */
-    border: 1px solid #1F4652; /* Bordo in armonia con lo schema di colori */
-    background-color: rgba(255, 255, 255, 0.7); /* Sfondo bianco leggermente trasparente */
-    color: #1F4652; /* Colore del testo */
-    font-weight: bold; /* Testo in grassetto */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Aggiunge un'ombra leggera */
+    font-size: 1rem;
+    /* Dimensione del testo */
+    padding: 5px 10px;
+    /* Spaziatura interna per il select */
+    border-radius: 5px;
+    /* Angoli arrotondati */
+    border: 1px solid #1F4652;
+    /* Bordo in armonia con lo schema di colori */
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Sfondo bianco leggermente trasparente */
+    color: #1F4652;
+    /* Colore del testo */
+    font-weight: bold;
+    /* Testo in grassetto */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Aggiunge un'ombra leggera */
 }
 
 .dataTypeSelection select:focus {
-    outline: none; /* Rimuove il bordo di focus standard */
-    border-color: #4CAF50; /* Cambia il colore del bordo al focus */
+    outline: none;
+    /* Rimuove il bordo di focus standard */
+    border-color: #4CAF50;
+    /* Cambia il colore del bordo al focus */
+}
+
+/* stile per la fascia icone/orario prima del grafico */
+
+.hourly-weather-icons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    /* Aggiungi uno spazio tra le icone e il grafico */
+}
+
+.hourly-icon-container {
+    text-align: center;
+    flex: 1;
+    /* Assicura che le icone siano distribuite equamente */
+}
+
+.hourly-icon i {
+    font-size: 24px;
+    /* Dimensione dell'icona */
+    color: #1f4652;
+    /* Colore dell'icona */
+}
+
+.hourly-time {
+    font-size: 12px;
+    /* Dimensione del testo dell'ora */
+    color: #333;
+    /* Colore del testo dell'ora */
+    margin-top: 5px;
 }
