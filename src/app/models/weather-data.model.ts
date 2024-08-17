@@ -1,5 +1,3 @@
-// weather-data.model.ts
-
 /*  Interfaccia vs Classe per il model:
 dato che devo definire solo a livello formale i dati
 e non ci sono manipolazioni da fare ne metodi da implementare, scelgo l'interfaccia

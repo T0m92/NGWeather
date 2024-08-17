@@ -1,4 +1,3 @@
-// weather.component.ts
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from '../weather.service';
 import { CommonModule } from '@angular/common';

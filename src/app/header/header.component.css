@@ -11,3 +11,11 @@
     font-family: 'Arial', sans-serif;
   }
   
+  .header-link {
+    text-decoration: none; /* Rimuove il sottolineato predefinito del link */
+    color: inherit; /* Mantiene il colore originale del testo */
+  }
+  
+  .header-link:hover {
+    opacity: 0.8; /* Aggiunge un effetto hover */
+  }
