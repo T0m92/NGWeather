@@ -35,9 +35,9 @@
       <div class="hourly-time">{{ j }}:00</div>
     </div>
   </div>
-
+  
+  <!-- grafico  -->
   <div class="dayDetails" *ngIf="selectedDayIndex !== null">
-    <!-- grafico  -->
     <canvas baseChart [data]="lineChart" [options]="lineChartOptions" [type]="'line'"></canvas>
   </div>
 </ng-container>
