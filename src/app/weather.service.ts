@@ -16,6 +16,7 @@ export class WeatherService {
 
   constructor(private http: HttpClient) { }
 
+  //aggiorna le coordinate utilizzate dal per le richieste meteo
   setCoordinates(latitude: number, longitude: number): void {
     this.coordinates.next({ latitude, longitude });
   }
@@ -36,8 +37,13 @@ export class WeatherService {
     );
   }
 
+  // Trasforma i dati grazzi in un formato strutturato:
+  // estrae i dati orari hourly dalla risposta
+  // itera su ogni giorno e su ogni ora per raccogliere dati
+  // raggruppa i dati orari in oggetti giornalieri (DailyWeatherData) che contengono un array di dati orari (HourlyWeatherData)
+  // restituisce un array di oggetti DailyWeatherData
   private transformWeatherData(data: any): DailyWeatherData[] {
-    const hourly = data.hourly;
+    const hourly = data.hourly; 
     const dailyWeatherData: DailyWeatherData[] = [];
 
     if (hourly && hourly.time) {

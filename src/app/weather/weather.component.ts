@@ -3,7 +3,10 @@ import { WeatherService } from '../weather.service';
 import { CommonModule } from '@angular/common';
 import { DailyWeatherData, HourlyWeatherData } from '../models/weather-data.model';
 import { BaseChartDirective } from 'ng2-charts'; //per i grafici
-import { FormsModule } from '@angular/forms'; // modulo necessario per eseguire two-way binding per la select del tipo dati del grafico
+import { FormsModule } from '@angular/forms'; 
+// modulo necessario per eseguire two-way binding (sync bidirez. dati) 
+//per la select del tipo dati del grafico
+
 //import per usare le label nel grafico
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
@@ -17,7 +20,7 @@ Chart.register(ChartDataLabels); //bisogna registrarlo prima di usarlo
   imports: [
     CommonModule, // Questo modulo fornisce la pipe 'date'
     BaseChartDirective, //per i grafici 
-    FormsModule // // Aggiungi FormsModule per supportare ngModel (two way binding) nel file weather.component.html
+    FormsModule // // Aggiunto FormsModule per supportare ngModel (two way binding) nel file weather.component.html
   ],
   styleUrls: ['./weather.component.css']
 })
@@ -37,6 +40,7 @@ export class WeatherComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) { }
 
+  // ottiene i dati meteo, la max/min, i weathercodes e inizializza il grafico
   ngOnInit(): void {
     this.weatherService.getWeatherData().subscribe(data => {
       this.dailyWeatherData = data;
@@ -129,16 +133,18 @@ initializeChart() {
       };
   }
 }
-
+  //aggiorna l'indice del giorno selezionato e ricarica il grafico
   selectDay(index: number) {
     this.selectedDayIndex = index === this.selectedDayIndex ? null : index;
     this.initializeChart();
   }
 
+  //ricarica il grafico quando viene cambiato il tipo di dato selezionato
   updateChart() {
     this.initializeChart();
   }
 
+  //estrae il valore specifico (temp, hum...) dal dato orario in base al tipo di dato scelto
   getDataByType(hour: HourlyWeatherData): number {
     switch (this.selectedDataType) {
       case 'temperature2m':
@@ -156,6 +162,7 @@ initializeChart() {
     }
   }
 
+  //restituisce l'etichetta che rappresenta il tipo di dato selezionato
   getLabelForSelectedDataType(): string {
     switch (this.selectedDataType) {
       case 'temperature2m':
@@ -173,6 +180,7 @@ initializeChart() {
     }
   }
 
+  //crea stringa max/min per le card dei giorni
   getDailyMaxMin() {
     this.maxMin = [];
     for (var i = 0; i < this.dailyWeatherData.length; i++) {
@@ -185,6 +193,7 @@ initializeChart() {
     console.log("Temperatura massima e minima per giorno: ", this.maxMin);
   }
 
+  //mappa i codici wmo e ritorna le classi css corrispondenti
   mapWmoToCssClass(code: number): string {
     if (code === 0 || code === 1) return 'wi-day-sunny';
     if (code === 2) return 'wi-day-cloudy';
@@ -201,6 +210,7 @@ initializeChart() {
     return '';
   }
 
+  /*processa i codici wmo per ciascun giorno mappandoli a classi css per le icone orarie e determinando la classe css piú severa per ogni giorno*/
   processWeatherCodes() {
     this.dailyWeatherClasses = [];
     this.severeWeatherClass = [];

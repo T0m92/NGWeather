@@ -10,11 +10,9 @@ import { LocationInfo } from './models/geocoding.model';
 })
 export class GeocodingService {
 
-  constructor(private http: HttpClient) {
-    console.log('GeocodingService initialized');
-  }
+  constructor(private http: HttpClient) {}
 
-  //gestione degli errori
+  //gestione degli errori generica 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`); // Log dell'errore sulla console
@@ -23,7 +21,8 @@ export class GeocodingService {
       return of(result as T);
     };
   }
-
+ 
+  //richiesta get all'API costrisce url,inoltra e la response viene mappata in un array di tipo location info
   getGeocodingInfo(name: string): Observable<LocationInfo[]> {
     return this.http.get<any>(`https://geocoding-api.open-meteo.com/v1/search?name=${name}&count=10&language=it&format=json`)
       .pipe(
@@ -32,6 +31,7 @@ export class GeocodingService {
       );
   }
 
+  //trasforma i dati grezzi ricevuti per rappresentare le info di geolocalizzazione
   transformGeocodingInfo(data: any): LocationInfo[] {
     const geocodingInfoCities: LocationInfo[] = [];
     const results = data.results;

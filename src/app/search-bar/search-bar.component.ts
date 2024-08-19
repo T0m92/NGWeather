@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
-  searchForm!: FormGroup;
+  searchForm!: FormGroup; // ASSERZIONE DEFINITIVA
   cities: LocationInfo[] = [];
   selectedCity!: LocationInfo;
 
@@ -25,6 +25,7 @@ export class SearchBarComponent implements OnInit {
     private weatherService: WeatherService
   ) { }
 
+  //inizializza reactive form , gestisce cambiamento del valore con funzione di debounce
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       cityName: ['']
@@ -41,6 +42,13 @@ export class SearchBarComponent implements OnInit {
   }
   }
 
+//   switchMap: Per ogni nuovo valore del campo cityName, switchMap:
+// Cancella qualsiasi richiesta di geocodifica in corso (se esiste) e ne avvia una nuova con il valore corrente.
+// Chiama il metodo getGeocodingInfo del servizio geocodingService, che presumibilmente restituisce un observable.
+// switchMap restituisce un nuovo observable che viene sottoscritto,
+//i risultati di questa chiamata (le città trovate) vengono assegnati alla variabile this.cities.
+
+  //scelta la cittá passa le coordinate al service
   onSelectCity(city: LocationInfo): void {
     this.selectedCity = city;
     this.cities = [];
@@ -55,20 +63,3 @@ export class SearchBarComponent implements OnInit {
   }
   
 }
-
-/*ASSERZIONE DEFINITIVA
-In caso di proprietá che sollevano problemi per mancata assegnazione, cioé dove c'é il rischio che un valore possa essere null
-si puó usare il punto esclamativo alla fine del nome nella dichiarazione.
-In questo modo diciamo a TypeScript che queste proprietà verranno sicuramente inizializzate prima di essere utilizzate.
-In pretica "ce ne assumiamo la responsabilitá" e facciamo quello che vogliamo fare. Peró le proprietá poi vanno inizializzate onde evitare errori
-esempio:
-
-searchForm!: FormGroup;
-selectedCity!: LocationInfo;
-
-potrei fare lo stesso con 
-this.searchForm.get('cityName')!.valueChanges.pipe(
-ma la gestisco con una semplice if
-
-quindi cityNameControl accoglie il valore dato in input dal form e i dati vengono passati al service solo se cityName é diverso da null
-*/

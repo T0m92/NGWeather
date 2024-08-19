@@ -1,4 +1,4 @@
-/* Contenitore principale della search bar */
+/* Contenitore principale search bar */
 .searchBarContainer {
     display: flex;
     flex-direction: column;
@@ -54,10 +54,7 @@
     background-color: rgba(255, 255, 255, 0.3); /* Colore bianco con trasparenza */
     backdrop-filter: blur(10px); /* Effetto vetro smerigliato */
     -webkit-backdrop-filter: blur(10px); /* Supporto per Safari */
-    /* border: 1px solid rgba(255, 255, 255, 0.18); Bordo semi-trasparente */
-    /* color: #1F4652; Colore del testo in armonia con lo schema di colori */
     color: black;
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); Aggiunge un'ombra leggera */
 }
 
 .info-city {
@@ -77,7 +74,7 @@ ul {
     height: 100%;
 }
 
-.size-btn-atuocomplete {
+.size-btn-autocomplete {
     height: 4vh; /* Imposta la stessa altezza dei pulsanti */
     margin-bottom: 10px;
     display: flex;
@@ -94,6 +91,6 @@ ul {
     cursor: pointer; /* Cambia il cursore per suggerire l'interattività */
 }
 
-.size-btn-atuocomplete:hover {
+.size-btn-autocomplete:hover {
     background-color: rgba(255, 255, 255, 0.5); /* Modifica il colore di sfondo al passaggio del mouse */
 }

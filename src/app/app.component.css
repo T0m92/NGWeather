@@ -1,7 +1,7 @@
     .app-container {
         display: flex;
         justify-content: center;
-        height: 100vh; /* Assicurati che l'altezza totale sia 100% della viewport */
+        height: 100vh; /* Assicura che l'altezza totale sia 100% della viewport */
         padding-left: 1rem;  /* Puoi usare valori in px, rem o % a seconda delle tue esigenze */
         padding-right: 1rem;
         
@@ -13,5 +13,5 @@
     }
 
     app-search-bar, app-weather {
-        width: 100%; /* Assicurati che i componenti occupino tutta la larghezza del container */
+        width: 100%; /* Assicura che i componenti occupino tutta la larghezza del container */
     }

@@ -6,7 +6,7 @@
   <div class="autocomplete-city" *ngIf="cities.length > 0">
     <ul>
       <li *ngFor="let city of cities">
-        <div class="size-btn-atuocomplete">
+        <div class="size-btn-autocomplete">
         <button class="citySelection" (click)="onSelectCity(city)">
           <span class="info-city">{{city.name}}, {{city.country_code}}, {{city.admin1}}</span>
         </button>
